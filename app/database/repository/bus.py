@@ -1,8 +1,8 @@
 from sqlmodel import select
-from schemas.bus import BusCreate
-from database.models.models import Bus
+from app.schemas.bus import BusCreate
+from app.database.models.models import Bus
 
-from database.session import SessionDep
+from app.database.session import SessionDep
 
 
 def create(bus: BusCreate, session: SessionDep):
@@ -42,7 +42,7 @@ def get_all(session: SessionDep):
 
 
 def delete_all_from_company(company_id: int, session: SessionDep):
-    session.exec(select(Bus)).filter(Bus.company_id == company_id).delete()
+    session.query(select(Bus)).filter(Bus.company_id == company_id).delete()
     session.commit()
     return {"message": f"All Buses from company with id {id} deleted successfully"}
 

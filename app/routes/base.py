@@ -1,7 +1,6 @@
 from fastapi import APIRouter
 
-from routes.v1 import route_bus_company, route_bus, route_bus_route
-
+from app.routes.v1 import route_bus_company, route_bus, route_bus_route
 
 api_router = APIRouter()
 api_router.include_router(

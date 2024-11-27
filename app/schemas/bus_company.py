@@ -1,5 +1,5 @@
 from sqlmodel import SQLModel
-from schemas.bus_route import BusRouteShow
+from app.schemas.bus_route import BusRouteShow
 
 
 class BusCompanyBase(SQLModel):

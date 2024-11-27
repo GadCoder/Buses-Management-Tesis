@@ -6,5 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi[all,standar]>=0.115.5",
+    "pytest>=8.3.3",
+    "requests>=2.32.3",
     "sqlmodel>=0.0.22",
 ]

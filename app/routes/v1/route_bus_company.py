@@ -1,10 +1,8 @@
 from fastapi import APIRouter, HTTPException, status
-from sqlalchemy.orm import Session
-from fastapi import Depends
 
-from database.session import get_session, SessionDep
-from schemas.bus_company import BusCompanyCreate, BusCompanyShow
-from database.repository import bus_company as bus_company_repo
+from app.database.session import SessionDep
+from app.schemas.bus_company import BusCompanyCreate, BusCompanyShow
+from app.database.repository import bus_company as bus_company_repo
 
 router = APIRouter()
 

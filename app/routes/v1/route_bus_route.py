@@ -1,9 +1,9 @@
 from fastapi import APIRouter, HTTPException, status
 
-from schemas.bus import BusShow
-from schemas.bus_route import BusRouteCreate, BusRouteShow
-from database.session import SessionDep
-from database.repository import bus_route as bus_route_repo
+from app.schemas.bus import BusShow
+from app.database.session import SessionDep
+from app.schemas.bus_route import BusRouteCreate, BusRouteShow
+from app.database.repository import bus_route as bus_route_repo
 
 router = APIRouter()
 
