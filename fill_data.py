@@ -1,3 +1,4 @@
+import string
 import random
 import requests
 
@@ -26,15 +27,25 @@ def create_routes():
     return True
 
 
-def create_buses():
-    plates = ["F5U-456", "G7T-123", "H8Y-789", "I9O-456", "J0P-123", "K1L-789"]
-    for plate in plates:
-        route_id = random.choice([1, 2])
+def create_buses(route_id: int):
+    for x in range(50):
+        plate = generate_random_plate()
         request = requests.post(f"{BASE_URL}/bus/create/", json={"plate": plate, "company_id": 1, "route_id": route_id})
         if request.status_code != 201:
-            print(f"Error creating bus {plate}")
+            print(f"Error creating bus {plate} for route {route_id}")
             return False
     return True
+
+
+def generate_random_plate():
+    # Generate a random uppercase letter
+    letter = random.choice(string.ascii_uppercase)
+    # Generate a random digit
+    digit = random.randint(0, 9)
+    # Generate a random 3-digit number
+    number = ''.join(random.choices(string.digits, k=3))
+    # Combine the parts to create the string
+    return f"{letter}{digit}{letter}-{number}"
 
 
 def main():
@@ -46,10 +57,12 @@ def main():
     if not created_routes:
         print("Error creating routes")
         return
-    created_buses = create_buses()
-    if not created_buses:
-        print("Error creating buses")
-        return
+    routes = [1, 2]
+    for route_id in routes:
+        created_buses = create_buses(route_id=route_id)
+        if not created_buses:
+            print(f"Error creating buses for route {route_id}")
+            return
     print("Data filled successfully")
 
 
