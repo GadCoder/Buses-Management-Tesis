@@ -4,13 +4,15 @@ import requests
 
 IS_DEV = True
 
-BASE_URL = "http://127.0.0.1:8000" if IS_DEV else ""
+BASE_URL = "http://127.0.0.1:8001" if IS_DEV else ""
 
 
 def create_companies():
     companies = ["El Rápido SAC"]
     for company in companies:
-        request = requests.post(f"{BASE_URL}/bus-company/create/", json={"name": company})
+        request = requests.post(
+            f"{BASE_URL}/bus-company/create/", json={"name": company}
+        )
         if request.status_code != 201:
             print(f"Error creating company {company}")
             return False
@@ -20,7 +22,9 @@ def create_companies():
 def create_routes():
     routes = ["2411", "8105"]
     for route in routes:
-        request = requests.post(f"{BASE_URL}/bus-route/create/", json={"name": route, "company_id": 1})
+        request = requests.post(
+            f"{BASE_URL}/bus-route/create/", json={"name": route, "company_id": 1}
+        )
         if request.status_code != 201:
             print(f"Error creating route {route}")
             return False
@@ -30,7 +34,10 @@ def create_routes():
 def create_buses(route_id: int):
     for x in range(50):
         plate = generate_random_plate()
-        request = requests.post(f"{BASE_URL}/bus/create/", json={"plate": plate, "company_id": 1, "route_id": route_id})
+        request = requests.post(
+            f"{BASE_URL}/bus/create/",
+            json={"plate": plate, "company_id": 1, "route_id": route_id},
+        )
         if request.status_code != 201:
             print(f"Error creating bus {plate} for route {route_id}")
             return False
@@ -43,7 +50,7 @@ def generate_random_plate():
     # Generate a random digit
     digit = random.randint(0, 9)
     # Generate a random 3-digit number
-    number = ''.join(random.choices(string.digits, k=3))
+    number = "".join(random.choices(string.digits, k=3))
     # Combine the parts to create the string
     return f"{letter}{digit}{letter}-{number}"
 
@@ -66,5 +73,5 @@ def main():
     print("Data filled successfully")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
